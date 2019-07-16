@@ -1,4 +1,4 @@
-.BreadBottom {
+.Aileron{
     height: 100px;
     width: 100px;
     background: linear-gradient(#87919e, #51555e);
@@ -7,7 +7,7 @@
     margin: 2% auto;
 }
 
-.BreadTop {
+.Top {
     height: 100px;
     width: 100px;
     background: linear-gradient(#87919e, #51555e);
@@ -31,6 +31,8 @@
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
     pointer-events: none;
+    height: 50;
+    top: '22%'
 }
 
 @keyframes App-logo-spin {
@@ -167,4 +169,8 @@
     height: 3%;
     background: linear-gradient(#bf3813, #c45e38);
     margin: 2% auto;
+}
+
+.img {
+
 }

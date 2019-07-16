@@ -8,9 +8,9 @@ class SpacecraftPart extends Component {
         let part = null
 
         switch (this.props.type) {
-            case ('bread-bottom'):
+            case ('ailerons'):
                 part =
-                        <div className={classes.BreadBottom}>
+                        <div className={classes.Aileron}>
                             <img style={{height: 50, marginTop: '22%'}} src={logo} className="App-logo" alt="logo"/>
                             <div className={classes.aileron1}></div>
                             <div className={classes.aileron1triangle}></div>
@@ -18,19 +18,17 @@ class SpacecraftPart extends Component {
                             <div className={classes.aileron2triangle}></div>
                     </div>;
                 break;
-            case ( 'bread-top' ):
+            case ( 'top' ):
                 part = (
-                    <div className={classes.BreadTop}>
-                        <div className={classes.Seeds1}></div>
+                    <div className={classes.Top}>
                         <div className={classes.tip}></div>
-                        {/*<div className={classes.Seeds2}></div>*/}
                     </div>
                 );
                 break;
             case ( 'meat' ):
                 part = <div className={classes.Meat}></div>;
                 break;
-            case ( 'cheese' ):
+            case ( 'middle' ):
                 part = <div className={classes.Cheese}></div>;
                 break;
             case ( 'bacon' ):
