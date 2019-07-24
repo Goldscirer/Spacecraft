@@ -13,9 +13,8 @@ const spacecraft = (props) => {
         })
         .reduce((arr, el) => {
             return arr.concat(el);
-    }, []);
-    console.log(transformedParts);
-    if (transformedParts.length === 0 ) {
+        }, []);
+    if (transformedParts.length === 0) {
         transformedParts = <p>Please start building racket!</p>
     }
     return (
@@ -25,4 +24,4 @@ const spacecraft = (props) => {
     );
 };
 
-export  default spacecraft;
+export default spacecraft;

@@ -5,18 +5,25 @@ import BuildControl from './BuildControl/BuildControl';
 const controls = [
     { label: 'Top', type: 'top'} ,
     { label: 'Middle', type: 'middle'},
-    { label: 'Bottom', type: 'bottom'},
+    { label: 'Bottom', type: 'ailerons'},
 ];
 
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
+        <p>Current price: {props.currentPrice}</p>
         {controls.map(ctrl => (
             <BuildControl
                 key={ctrl.label}
                 label={ctrl.label}
                 added={() => props.partAdded(ctrl.type)}
+                removed={() => props.partRemoved(ctrl.type)}
+                disabled={props.disabled[ctrl.type]}
             />
         ))}
+        <button
+            className={classes.OrderButton}
+            disabled={props.readyToStart}>
+            LUNCH NOW </button>
     </div>
 );
 

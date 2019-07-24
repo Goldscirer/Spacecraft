@@ -17,7 +17,8 @@ class ScpacecraftBuilder extends Component {
             middle: 1,
             ailerons: 1,
         },
-        totalPrice: 2000000,
+        totalPrice: 3500000,
+        readyToStart: false,
     }
 
     addPartHandler = (type) => {
@@ -31,13 +32,46 @@ class ScpacecraftBuilder extends Component {
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + priceAddition;
         this.setState({totalPrice: newPrice, parts: updatesParts})
+        this.updateReadyToStart(updatesParts)
     }
 
     removePartHandler = (type) => {
+        const oldCount = this.state.parts[type];
+        if( oldCount !== 0) {
+            const updateCount = oldCount - 1;
+            const updatesParts = {
+                ...this.state.parts
+            };
+            updatesParts[type] = updateCount;
+            const priceAddition = PARTS_PRICES[type];
+            const oldPrice = this.state.totalPrice;
+            const newPrice = oldPrice - priceAddition;
+            this.setState({totalPrice: newPrice, parts: updatesParts})
+            this.updateReadyToStart(updatesParts)
+        }
+    }
 
+    updateReadyToStart() {
+        const parts = {
+            ...this.state.parts
+        };
+        const sum = Object.keys(parts)
+            .map(partsKey => {
+                return parts[partsKey]
+            })
+            .reduce((sum, el) => {
+                return sum + el;
+            }, 0)
+        this.setState({readyToStart: sum > 0})
     }
 
     render() {
+        const disabledInfo = {
+            ...this.state.parts
+        };
+        for (let key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0
+        }
         return (
             <Aux>
                 <div className="container">
@@ -51,6 +85,10 @@ class ScpacecraftBuilder extends Component {
                             <div style={{position: 'absolute'}}>
                                 <BuildControls
                                     partAdded={this.addPartHandler}
+                                    partRemoved={this.removePartHandler}
+                                    disabled={disabledInfo}
+                                    currentPrice={this.state.totalPrice}
+                                    readyToStart={this.state.readyToStart}
                                 />
                             </div>
                         </div>
