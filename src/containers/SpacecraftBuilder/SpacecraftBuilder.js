@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/ReactAux';
 import Spacecraft from "./../../components/Spacecraft/Spacecraft"
 import BuildControls from '../../components/Spacecraft/BuildControls/BuildControls'
+import Modal from "../../components/UI/Modal/Modal";
 
 const PARTS_PRICES = {
     top: 500000,
@@ -51,10 +52,7 @@ class ScpacecraftBuilder extends Component {
         }
     }
 
-    updateReadyToStart() {
-        const parts = {
-            ...this.state.parts
-        };
+    updateReadyToStart(parts) {
         const sum = Object.keys(parts)
             .map(partsKey => {
                 return parts[partsKey]
@@ -74,6 +72,7 @@ class ScpacecraftBuilder extends Component {
         }
         return (
             <Aux>
+                <Modal />
                 <div className="container">
                     <div className="row">
                         <div className="col-sm">

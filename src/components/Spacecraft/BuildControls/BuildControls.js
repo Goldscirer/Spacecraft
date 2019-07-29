@@ -22,7 +22,7 @@ const buildControls = (props) => (
         ))}
         <button
             className={classes.OrderButton}
-            disabled={props.readyToStart}>
+            disabled={!props.readyToStart}>
             LUNCH NOW </button>
     </div>
 );
