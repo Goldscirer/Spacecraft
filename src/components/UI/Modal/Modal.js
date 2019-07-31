@@ -19,7 +19,11 @@ class Modal extends Component {
                         transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
                         opacity: this.props.show ? '1' : '0'
                     }}>
+                    <ul>
                     {this.props.children}
+                    </ul>
+                    <button>CANCEL</button>
+                    <button>CONTINUE</button>
                 </div>
             </ReactAux>
         )
