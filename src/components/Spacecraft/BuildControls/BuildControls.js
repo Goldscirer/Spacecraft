@@ -21,6 +21,7 @@ const buildControls = (props) => (
             />
         ))}
         <button
+            onClick={props.lunch}
             className={classes.OrderButton}
             disabled={!props.readyToStart}>
             LUNCH NOW </button>

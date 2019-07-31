@@ -3,6 +3,7 @@ import Aux from '../../hoc/ReactAux';
 import Spacecraft from "./../../components/Spacecraft/Spacecraft"
 import BuildControls from '../../components/Spacecraft/BuildControls/BuildControls'
 import Modal from "../../components/UI/Modal/Modal";
+import LunchSummary from '../../components/Spacecraft/LunchSummary/LunchSummary'
 
 const PARTS_PRICES = {
     top: 500000,
@@ -20,6 +21,7 @@ class ScpacecraftBuilder extends Component {
         },
         totalPrice: 3500000,
         readyToStart: false,
+        lunch: false,
     }
 
     addPartHandler = (type) => {
@@ -63,6 +65,14 @@ class ScpacecraftBuilder extends Component {
         this.setState({readyToStart: sum > 0})
     }
 
+    lunchHandler = () => {
+        this.setState({lunch: true})
+    }
+
+    cancelModal = () => {
+        this.setState({lunch: false})
+    }
+
     render() {
         const disabledInfo = {
             ...this.state.parts
@@ -72,7 +82,9 @@ class ScpacecraftBuilder extends Component {
         }
         return (
             <Aux>
-                <Modal />
+                <Modal show={this.state.lunch} modalClosed={this.cancelModal}>
+                    <LunchSummary parts={this.state.parts} />
+                </Modal>
                 <div className="container">
                     <div className="row">
                         <div className="col-sm">
@@ -86,6 +98,7 @@ class ScpacecraftBuilder extends Component {
                                     partAdded={this.addPartHandler}
                                     partRemoved={this.removePartHandler}
                                     disabled={disabledInfo}
+                                    lunch={this.lunchHandler}
                                     currentPrice={this.state.totalPrice}
                                     readyToStart={this.state.readyToStart}
                                 />
