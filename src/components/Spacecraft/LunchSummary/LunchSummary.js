@@ -1,5 +1,6 @@
 import React from 'react';
 import Aux from './../../../hoc/ReactAux'
+import Button from './../../UI/Button/Button'
 
 const lunchSummary = (props) => {
     const partsSummary = Object.keys(props.parts)
@@ -15,6 +16,8 @@ const lunchSummary = (props) => {
             <ul>
                 {partsSummary}
             </ul>
+            <Button btnType="Danger" clicked={props.lunchCancelled}>CANCEL</Button>
+            <Button btnType="Success" clicked={props.lunchContinue}>CONTINUE</Button>
         </Aux>
     )
 };

@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import classes from './Button.module.css';
 
 class Button extends Component {
     render() {
         return (
-            <div>
-                
-            </div>
+            <button
+                className={[classes.Button, classes[this.props.btnType]]}
+                onClick={this.props.clicked}
+                >{this.props.children}</button>
         );
     }
 }

@@ -73,6 +73,10 @@ class ScpacecraftBuilder extends Component {
         this.setState({lunch: false})
     }
 
+    pleaseContinueHandler = () => {
+        alert('You can continue')
+    }
+
     render() {
         const disabledInfo = {
             ...this.state.parts
@@ -83,7 +87,7 @@ class ScpacecraftBuilder extends Component {
         return (
             <Aux>
                 <Modal show={this.state.lunch} modalClosed={this.cancelModal}>
-                    <LunchSummary parts={this.state.parts} />
+                    <LunchSummary parts={this.state.parts} lunchCancelled={this.cancelModal} lunchContinue={this.pleaseContinueHandler}/>
                 </Modal>
                 <div className="container">
                     <div className="row">

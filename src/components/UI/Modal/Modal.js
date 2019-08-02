@@ -22,8 +22,6 @@ class Modal extends Component {
                     <ul>
                     {this.props.children}
                     </ul>
-                    <button>CANCEL</button>
-                    <button>CONTINUE</button>
                 </div>
             </ReactAux>
         )
