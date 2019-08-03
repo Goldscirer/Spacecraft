@@ -87,7 +87,7 @@ class ScpacecraftBuilder extends Component {
         return (
             <Aux>
                 <Modal show={this.state.lunch} modalClosed={this.cancelModal}>
-                    <LunchSummary parts={this.state.parts} lunchCancelled={this.cancelModal} lunchContinue={this.pleaseContinueHandler}/>
+                    <LunchSummary price={this.state.totalPrice} parts={this.state.parts} lunchCancelled={this.cancelModal} lunchContinue={this.pleaseContinueHandler}/>
                 </Modal>
                 <div className="container">
                     <div className="row">

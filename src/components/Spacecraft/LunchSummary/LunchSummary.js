@@ -16,6 +16,7 @@ const lunchSummary = (props) => {
             <ul>
                 {partsSummary}
             </ul>
+            <p><strong>Total price: {props.price}$</strong></p>
             <Button btnType="Danger" clicked={props.lunchCancelled}>CANCEL</Button>
             <Button btnType="Success" clicked={props.lunchContinue}>CONTINUE</Button>
         </Aux>
