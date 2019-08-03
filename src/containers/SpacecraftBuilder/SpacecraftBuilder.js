@@ -20,7 +20,7 @@ class ScpacecraftBuilder extends Component {
             ailerons: 1,
         },
         totalPrice: 3500000,
-        readyToStart: false,
+        readyToStart: true,
         lunch: false,
     }
 
