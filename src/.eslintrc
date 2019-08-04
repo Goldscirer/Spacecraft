@@ -1,0 +1,153 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "react",
+    "import",
+    "prettier",
+    "react-hooks"
+  ],
+  "globals": {
+    "define": true,
+    "appConfig": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "jsx": true,
+    "modules": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "restParams": true,
+    "spread": true,
+    "superInFunctions": true,
+    "templateStrings": true
+  },
+  "rules": {
+    "no-class-assign": 0,
+    "no-case-declarations": 2,
+    "no-fallthrough": 2,
+    "strict": [
+      2,
+      "global"
+    ],
+    "no-unused-vars": 1,
+    "no-console": [
+      1,
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-debugger": 1,
+    "no-empty": [
+      1,
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "camelcase": [
+      1,
+      {
+        "properties": "always"
+      }
+    ],
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
+    "consistent-return": 0,
+    "id-length": [
+      2,
+      {
+        "min": 2,
+        "exceptions": [
+          "i",
+          "j",
+          "a",
+          "_"
+        ]
+      }
+    ],
+    "arrow-spacing": 2,
+    "arrow-parens": [
+      2,
+      "always"
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
+    "react/jsx-uses-react": 1,
+    "react/jsx-no-undef": 2,
+    "react/no-is-mounted": 2,
+    "react/jsx-wrap-multilines": 2,
+    "react/display-name": [
+      1,
+      {
+        "ignoreTranspilerName": false
+      }
+    ],
+    "react/forbid-prop-types": [
+      1,
+      {
+        "forbid": [
+          "any"
+        ]
+      }
+    ],
+    "react/jsx-boolean-value": 1,
+    "react/jsx-closing-bracket-location": 0,
+    "react/jsx-curly-spacing": 1,
+    "react/jsx-indent-props": 0,
+    "react/jsx-key": 1,
+    "react/jsx-max-props-per-line": 0,
+    "react/jsx-no-bind": 0,
+    "react/jsx-no-duplicate-props": 1,
+    "react/jsx-no-literals": 0,
+    "react/jsx-pascal-case": 1,
+    "react/jsx-sort-prop-types": 0,
+    "react/jsx-sort-props": 0,
+    "react/jsx-uses-vars": 1,
+    "react/no-danger": 2,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-direct-mutation-state": 1,
+    "react/no-multi-comp": [
+      1,
+      {
+        "ignoreStateless": true
+      }
+    ],
+    "react/no-set-state": 0,
+    "react/no-unknown-property": 1,
+    "react/prefer-es6-class": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/self-closing-comp": 1,
+    "react/sort-comp": 1,
+    "react-hooks/rules-of-hooks": "error",
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "semi": false,
+        "arrowParens": "always",
+        "printWidth": 120
+      }
+    ]
+  }
+}
