@@ -1,121 +1,123 @@
-import React, {Component} from 'react';
-import Aux from '../../hoc/ReactAux';
-import Spacecraft from "./../../components/Spacecraft/Spacecraft"
+import React, { Component } from 'react'
+import Aux from '../../hoc/ReactAux'
+import Spacecraft from './../../components/Spacecraft/Spacecraft'
 import BuildControls from '../../components/Spacecraft/BuildControls/BuildControls'
-import Modal from "../../components/UI/Modal/Modal";
-import LunchSummary from '../../components/Spacecraft/LunchSummary/LunchSummary'
+import Modal from '../../components/UI/Modal/Modal'
+import LaunchSummary from '../../components/Spacecraft/LaunchSummary/LaunchSummary'
 
 const PARTS_PRICES = {
-    top: 500000,
-    middle: 1000000,
-    ailerons: 2000000,
+  top: 500000,
+  middle: 1000000,
+  ailerons: 2000000,
 }
 
 class ScpacecraftBuilder extends Component {
+  state = {
+    parts: {
+      top: 1,
+      middle: 1,
+      ailerons: 1,
+    },
+    totalPrice: 3500000,
+    readyToStart: true,
+    launch: false,
+  }
 
-    state = {
-        parts: {
-            top: 1,
-            middle: 1,
-            ailerons: 1,
-        },
-        totalPrice: 3500000,
-        readyToStart: true,
-        lunch: false,
+  addPartHandler = (type) => {
+    const oldCount = this.state.parts[type]
+    const updateCount = oldCount + 1
+    const updatesParts = {
+      ...this.state.parts,
     }
+    updatesParts[type] = updateCount
+    const priceAddition = PARTS_PRICES[type]
+    const oldPrice = this.state.totalPrice
+    const newPrice = oldPrice + priceAddition
+    this.setState({ totalPrice: newPrice, parts: updatesParts })
+    this.updateReadyToStart(updatesParts)
+  }
 
-    addPartHandler = (type) => {
-        const oldCount = this.state.parts[type];
-        const updateCount= oldCount + 1;
-        const updatesParts = {
-            ...this.state.parts
-        };
-        updatesParts[type] = updateCount;
-        const priceAddition = PARTS_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice + priceAddition;
-        this.setState({totalPrice: newPrice, parts: updatesParts})
-        this.updateReadyToStart(updatesParts)
+  removePartHandler = (type) => {
+    const oldCount = this.state.parts[type]
+    if (oldCount !== 0) {
+      const updateCount = oldCount - 1
+      const updatesParts = {
+        ...this.state.parts,
+      }
+      updatesParts[type] = updateCount
+      const priceAddition = PARTS_PRICES[type]
+      const oldPrice = this.state.totalPrice
+      const newPrice = oldPrice - priceAddition
+      this.setState({ totalPrice: newPrice, parts: updatesParts })
+      this.updateReadyToStart(updatesParts)
     }
+  }
 
-    removePartHandler = (type) => {
-        const oldCount = this.state.parts[type];
-        if( oldCount !== 0) {
-            const updateCount = oldCount - 1;
-            const updatesParts = {
-                ...this.state.parts
-            };
-            updatesParts[type] = updateCount;
-            const priceAddition = PARTS_PRICES[type];
-            const oldPrice = this.state.totalPrice;
-            const newPrice = oldPrice - priceAddition;
-            this.setState({totalPrice: newPrice, parts: updatesParts})
-            this.updateReadyToStart(updatesParts)
-        }
+  updateReadyToStart(parts) {
+    const sum = Object.keys(parts)
+      .map((partsKey) => {
+        return parts[partsKey]
+      })
+      .reduce((sum, el) => {
+        return sum + el
+      }, 0)
+    this.setState({ readyToStart: sum > 0 })
+  }
+
+  launchHandler = () => {
+    this.setState({ launch: true })
+  }
+
+  cancelModal = () => {
+    this.setState({ launch: false })
+  }
+
+  pleaseContinueHandler = () => {
+    alert('You can continue')
+  }
+
+  render() {
+    const disabledInfo = {
+      ...this.state.parts,
     }
-
-    updateReadyToStart(parts) {
-        const sum = Object.keys(parts)
-            .map(partsKey => {
-                return parts[partsKey]
-            })
-            .reduce((sum, el) => {
-                return sum + el;
-            }, 0)
-        this.setState({readyToStart: sum > 0})
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0
     }
-
-    lunchHandler = () => {
-        this.setState({lunch: true})
-    }
-
-    cancelModal = () => {
-        this.setState({lunch: false})
-    }
-
-    pleaseContinueHandler = () => {
-        alert('You can continue')
-    }
-
-    render() {
-        const disabledInfo = {
-            ...this.state.parts
-        };
-        for (let key in disabledInfo) {
-            disabledInfo[key] = disabledInfo[key] <= 0
-        }
-        return (
-            <Aux>
-                <Modal show={this.state.lunch} modalClosed={this.cancelModal}>
-                    <LunchSummary price={this.state.totalPrice} parts={this.state.parts} lunchCancelled={this.cancelModal} lunchContinue={this.pleaseContinueHandler}/>
-                </Modal>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm">
-                            <div>
-                                <Spacecraft parts={this.state.parts} />
-                            </div>
-                        </div>
-                        <div className="col-sm">
-                            <div style={{position: 'absolute'}}>
-                                <BuildControls
-                                    partAdded={this.addPartHandler}
-                                    partRemoved={this.removePartHandler}
-                                    disabled={disabledInfo}
-                                    lunch={this.lunchHandler}
-                                    currentPrice={this.state.totalPrice}
-                                    readyToStart={this.state.readyToStart}
-                                />
-                            </div>
-                        </div>
-                        <div className="col-sm">
-                        </div>
-                    </div>
-                </div>
-            </Aux>
-
-        );
-    }
+    return (
+      <Aux>
+        <Modal show={this.state.launch} modalClosed={this.cancelModal}>
+          <LaunchSummary
+            price={this.state.totalPrice}
+            parts={this.state.parts}
+            launchCancelled={this.cancelModal}
+            launchContinue={this.pleaseContinueHandler}
+          />
+        </Modal>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <div>
+                <Spacecraft parts={this.state.parts} />
+              </div>
+            </div>
+            <div className="col-sm">
+              <div style={{ position: 'absolute' }}>
+                <BuildControls
+                  partAdded={this.addPartHandler}
+                  partRemoved={this.removePartHandler}
+                  disabled={disabledInfo}
+                  launch={this.launchHandler}
+                  currentPrice={this.state.totalPrice}
+                  readyToStart={this.state.readyToStart}
+                />
+              </div>
+            </div>
+            <div className="col-sm" />
+          </div>
+        </div>
+      </Aux>
+    )
+  }
 }
 
-export default ScpacecraftBuilder;
+export default ScpacecraftBuilder
