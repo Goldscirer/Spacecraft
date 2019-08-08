@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import classes from './Toolbar.module.css'
 
 class Toolbar extends Component {
   render() {
     return (
-      <header>
+      <header className={classes.Toolbar} >
         <div>MENU</div>
         <div>LOGO</div>
         <nav>...</nav>
@@ -12,7 +12,5 @@ class Toolbar extends Component {
     )
   }
 }
-
-Toolbar.propTypes = {}
 
 export default Toolbar
