@@ -4,6 +4,7 @@ import Spacecraft from './../../components/Spacecraft/Spacecraft'
 import BuildControls from '../../components/Spacecraft/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
 import LaunchSummary from '../../components/Spacecraft/LaunchSummary/LaunchSummary'
+import { CircularProgress } from '../../components/CircularProgress/CircuralProgress'
 
 const PARTS_PRICES = {
   top: 500000,
@@ -96,6 +97,15 @@ class ScpacecraftBuilder extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm">
+              Speed:<br/>
+              <CircularProgress strokeWidth="20" sqSize="150" percentage={25} color="red"/>
+              Aerodynamic:<br/>
+              <CircularProgress strokeWidth="20" sqSize="150" percentage={47} color="blue"/>
+              Weight:<br/>
+              <CircularProgress strokeWidth="20" sqSize="150" percentage={80} color="green"/>
+
+            </div>
+            <div className="col-sm">
               <div>
                 <Spacecraft parts={this.state.parts} />
               </div>
@@ -112,7 +122,6 @@ class ScpacecraftBuilder extends Component {
                 />
               </div>
             </div>
-            <div className="col-sm" />
           </div>
         </div>
       </Aux>
