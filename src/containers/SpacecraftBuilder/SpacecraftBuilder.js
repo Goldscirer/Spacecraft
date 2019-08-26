@@ -15,16 +15,20 @@ const PARTS_PRICES = {
 class ScpacecraftBuilder extends Component {
   state = {
     parts: {
-      top: 1,
-      middle: 1,
-      ailerons: 1,
+      top: 0,
+      middle: 0,
+      ailerons: 0,
     },
-    totalPrice: 3500000,
+    totalPrice: 0,
     readyToStart: true,
     launch: false,
+    speed: 0,
+    weight: 0,
+    aerodynamic: 0,
   }
 
   addPartHandler = (type) => {
+
     const oldCount = this.state.parts[type]
     const updateCount = oldCount + 1
     const updatesParts = {
@@ -35,7 +39,58 @@ class ScpacecraftBuilder extends Component {
     const oldPrice = this.state.totalPrice
     const newPrice = oldPrice + priceAddition
     this.setState({ totalPrice: newPrice, parts: updatesParts })
+    this.countSpeed(updatesParts)
+    this.countAerodynamic(updatesParts)
+    this.countWeight(updatesParts)
     this.updateReadyToStart(updatesParts)
+  }
+
+  countSpeed(parts) {
+    let speed = 0
+    if (parts.ailerons === 1) {
+      speed += 25
+      if (parts.top === 1) {
+        speed += 25
+      }
+    } else {
+      if (parts.top === 1) {
+        speed += 25
+      }
+    }
+    if (parts.middle > 0 && parts.top === 1 && parts.ailerons === 1){
+      speed = speed + parts.middle * 20
+    }
+    if (speed > 100){
+      speed = 100
+    }
+    this.setState({ speed: speed })
+  }
+
+  countAerodynamic(parts) {
+    let aerodynamic = 0
+    if (parts.ailerons === 1) {
+      aerodynamic += 50
+      if (parts.top === 1) {
+        aerodynamic += 50
+      }
+    } else {
+      if (parts.top === 1) {
+        aerodynamic += 25
+      }
+    }
+    this.setState({ aerodynamic: aerodynamic })
+  }
+
+  countWeight(parts) {
+    let weight = 0
+    weight = weight + parts.middle * 13 + weight + parts.top * 14 + weight + parts.ailerons * 21
+    if(parts.top ===1 && parts.ailerons === 1 && parts.middle >= 4) {
+      this.setState({ speed: this.state.speed -10 })
+    }
+    if (weight > 100){
+      weight = 100
+    }
+    this.setState({ weight: weight })
   }
 
   removePartHandler = (type) => {
@@ -50,6 +105,9 @@ class ScpacecraftBuilder extends Component {
       const oldPrice = this.state.totalPrice
       const newPrice = oldPrice - priceAddition
       this.setState({ totalPrice: newPrice, parts: updatesParts })
+      this.countSpeed(updatesParts)
+      this.countAerodynamic(updatesParts)
+      this.countWeight(updatesParts)
       this.updateReadyToStart(updatesParts)
     }
   }
@@ -97,13 +155,16 @@ class ScpacecraftBuilder extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm">
-              Speed:<br/>
-              <CircularProgress strokeWidth="20" sqSize="150" percentage={25} color="red"/>
-              Aerodynamic:<br/>
-              <CircularProgress strokeWidth="20" sqSize="150" percentage={47} color="blue"/>
-              Weight:<br/>
-              <CircularProgress strokeWidth="20" sqSize="150" percentage={80} color="green"/>
-
+              Speed:
+              <br />
+              <CircularProgress strokeWidth="20" sqSize="150" percentage={this.state.speed} color="red" />
+              Aerodynamic:
+              <br />
+              <CircularProgress strokeWidth="20" sqSize="150" percentage={this.state.aerodynamic} color="blue" />
+              <br />
+              Weight:
+              <br />
+              <CircularProgress strokeWidth="20" sqSize="150" percentage={this.state.weight} color="green" />
             </div>
             <div className="col-sm">
               <div>
