@@ -28,7 +28,6 @@ class ScpacecraftBuilder extends Component {
   }
 
   addPartHandler = (type) => {
-
     const oldCount = this.state.parts[type]
     const updateCount = oldCount + 1
     const updatesParts = {
@@ -57,10 +56,10 @@ class ScpacecraftBuilder extends Component {
         speed += 25
       }
     }
-    if (parts.middle > 0 && parts.top === 1 && parts.ailerons === 1){
+    if (parts.middle > 0 && parts.top === 1 && parts.ailerons === 1) {
       speed = speed + parts.middle * 20
     }
-    if (speed > 100){
+    if (speed > 100) {
       speed = 100
     }
     this.setState({ speed: speed })
@@ -84,10 +83,10 @@ class ScpacecraftBuilder extends Component {
   countWeight(parts) {
     let weight = 0
     weight = weight + parts.middle * 13 + weight + parts.top * 14 + weight + parts.ailerons * 21
-    if(parts.top ===1 && parts.ailerons === 1 && parts.middle >= 4) {
-      this.setState({ speed: this.state.speed -10 })
+    if (parts.top === 1 && parts.ailerons === 1 && parts.middle >= 4) {
+      this.setState({ speed: this.state.speed - 10 })
     }
-    if (weight > 100){
+    if (weight > 100) {
       weight = 100
     }
     this.setState({ weight: weight })
@@ -132,7 +131,9 @@ class ScpacecraftBuilder extends Component {
   }
 
   pleaseContinueHandler = () => {
-    alert('You can continue')
+    alert('Construct rocket again!')
+    window.location.reload()
+    this.setState({ launch: false })
   }
 
   render() {

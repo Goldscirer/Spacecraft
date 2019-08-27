@@ -1,19 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Layout from './components/Layout/Layout';
+import React from 'react'
+import './App.css'
+import Layout from './components/Layout/Layout'
 import SpacecraftBuilder from './containers/SpacecraftBuilder/SpacecraftBuilder'
 
 function App() {
+  document.body.style = 'background: #282c34;'
+
   return (
     <div className="App">
       <header className="App-header">
         <Layout>
-          <SpacecraftBuilder></SpacecraftBuilder>
+          <SpacecraftBuilder />
         </Layout>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
